@@ -92,5 +92,4 @@ function selectAnswer(e) {
         selectedBtn.classList.add("incorrect");
     }
 }
-
 startQuiz();
