@@ -23,7 +23,7 @@ const question = [
         question: "Air minum untuk menjaga kamu tetap fokus?",
         answers: [
             {text: "Kopi", correct: false},
-            {text: "Kratingdaeng!", correct: true} ,
+            {text: "Kratingdaeng!", correct: false} ,
             {text: "Air Putih", correct: true},
             {text: "Es Jeruk", correct: false},
         ]
@@ -76,6 +76,7 @@ function showQuestion() {
     })
 }
 
+// reset tampilan
 function resetState() {
     nextButton.style.display = "none";
     while(answerButtons.firstChild) {
@@ -83,11 +84,13 @@ function resetState() {
     }
 }
 
+// pengaturan penampilan button
 function selectAnswer(e) {
     const selectedBtn = e.target;
     const isCorrect = selectedBtn.dataset.correct === "true";
     if(isCorrect) {
         selectedBtn.classList.add("correct");
+        score++;
     } else {
         selectedBtn.classList.add("incorrect");
     }
@@ -99,4 +102,31 @@ function selectAnswer(e) {
         });
         nextButton.style.display = "block";
 }
+
+// hitung score
+function showScore(){
+    resetState();
+    questionElement.innerHTML = `You scored ${score} out of ${question.length}!`
+    nextButton.innerHTML = "play Again?";
+    nextButton.style.display = "block"
+}
+
+// handle next button
+function handleNextButton(){
+    currentQuestionIndex++;
+    if(currentQuestionIndex < question.length){
+        showQuestion();
+    } else {
+        showScore();
+    }
+}
+
+// next btn ketika di klik
+nextButton.addEventListener('click', () => {
+    if(currentQuestionIndex < question.length){
+        handleNextButton()
+    } else {
+        startQuiz()
+    }
+})
 startQuiz();
