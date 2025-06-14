@@ -78,3 +78,13 @@ body{
 .incorrect {
     background: #ff9393;
 }
+
+footer{
+    padding: 8px 0;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
